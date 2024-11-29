@@ -8,7 +8,7 @@ import cors from 'cors';
 config();
 const app = express();
 app.use(cors({
-    origin: 'http://localhost:5173', // Your Vite dev server URL
+    origin: ['http://localhost:5173', "https://shrutika-app-plotnew.vercel.app"], // Your Vite dev server URL
     // credentials: true
 }));
 // Middleware to parse JSON requests
