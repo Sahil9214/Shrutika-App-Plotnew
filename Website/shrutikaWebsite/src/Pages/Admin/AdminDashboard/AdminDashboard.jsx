@@ -17,7 +17,8 @@ const AdminDashboard = () => {
   const [adminCabinetData, setAdminCabinetData] = useState([]);
   const [selectedCabinetId, setSelectedCabinetId] = useState(null);
   const [adminCabinetItemData, setAdminCabinetItemData] = useState([]);
-  console.log("**** adminCabinetItemData ********** ", adminCabinetItemData);
+
+  // for Room API DATA
   const fetchRoomData = async () => {
     try {
       setIsLoading(true);
@@ -41,17 +42,12 @@ const AdminDashboard = () => {
     setSelectedRoomId(roomId);
     try {
       const response = await getCabinetData(roomId);
-      // Set the cabinet data in state to render it in AdminCabinet section
+      console.log("*** response ********** ", response.data);
       setAdminCabinetData(response.data);
     } catch (error) {
       console.error("Error fetching room data:", error);
     }
   };
-
-  useEffect(() => {
-    fetchRoomData();
-  }, []);
-
   const handleAddRoom = async () => {
     if (!newRoomName.trim()) return;
 
@@ -79,7 +75,7 @@ const AdminDashboard = () => {
       setIsLoading(false);
     }
   };
-
+  //  HANDLE THE ADMINCABINETITEM
   const handleCabinetSelect = async (cabinetId) => {
     setSelectedCabinetId(cabinetId);
     try {
@@ -89,32 +85,60 @@ const AdminDashboard = () => {
       console.error("Error fetching cabinet items:", error);
     }
   };
+  const refreshCabinetData = async (roomId) => {
+    try {
+      const response = await getCabinetData(roomId);
+      setAdminCabinetData(response.data);
+    } catch (error) {
+      console.error("Error refreshing cabinet data:", error);
+    }
+  };
+
+  const refreshCabinetItems = async (cabinetId) => {
+    try {
+      const response = await getCabinateItemData(cabinetId);
+      setAdminCabinetItemData(response.data);
+    } catch (error) {
+      console.error("Error refreshing cabinet items:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRoomData();
+  }, []);
 
   return (
-    <div className="min-h-[90vh] flex flex-wrap justify-center items-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 gap-4 overflow-y-auto ">
-      <div className="h-[80vh] w-full sm:w-1/2 lg:w-1/3 flex-1 shadow-lg">
-        <AdminRoom
-          handleAddRoom={handleAddRoom}
-          isAddRoomModalOpen={isAddRoomModalOpen}
-          setIsAddRoomModalOpen={setIsAddRoomModalOpen}
-          isLoading={isLoading}
-          handleDeleteRoom={handleDeleteRoom}
-          rooms={rooms}
-          selectedRoomId={selectedRoomId}
-          handleRoomSelect={handleRoomSelect}
-        />
-      </div>
-      <div className="h-[80vh] w-full sm:w-1/2 lg:w-1/3 flex-1 shadow-lg">
-        <AdminCabinate
-          adminCabinetData={adminCabinetData}
-          selectedRoomId={selectedRoomId}
-          handleCabinetSelect={handleCabinetSelect}
-          selectedCabinetId={selectedCabinetId}
-          setSelectedCabinetId={setSelectedCabinetId}
-        />
-      </div>
-      <div className="h-[80vh] w-full sm:w-1/2 lg:w-1/3 flex-1 shadow-lg">
-        <AdminCabinetItem adminCabinetItemData={adminCabinetItemData} />
+    <div className="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 max-w-[1920px] mx-auto">
+        <div className="min-h-[500px] md:h-[calc(100vh-120px)] bg-white rounded-lg shadow-lg">
+          <AdminRoom
+            handleAddRoom={handleAddRoom}
+            isAddRoomModalOpen={isAddRoomModalOpen}
+            setIsAddRoomModalOpen={setIsAddRoomModalOpen}
+            isLoading={isLoading}
+            handleDeleteRoom={handleDeleteRoom}
+            rooms={rooms}
+            selectedRoomId={selectedRoomId}
+            handleRoomSelect={handleRoomSelect}
+          />
+        </div>
+        <div className="min-h-[500px] md:h-[calc(100vh-120px)] bg-white rounded-lg shadow-lg">
+          <AdminCabinate
+            adminCabinetData={adminCabinetData}
+            selectedRoomId={selectedRoomId}
+            handleCabinetSelect={handleCabinetSelect}
+            selectedCabinetId={selectedCabinetId}
+            setSelectedCabinetId={setSelectedCabinetId}
+            refreshCabinetData={refreshCabinetData}
+          />
+        </div>
+        <div className="min-h-[500px] md:h-[calc(100vh-120px)] bg-white rounded-lg shadow-lg">
+          <AdminCabinetItem
+            adminCabinetItemData={adminCabinetItemData}
+            selectedCabinetId={selectedCabinetId}
+            refreshCabinetItems={refreshCabinetItems}
+          />
+        </div>
       </div>
     </div>
   );

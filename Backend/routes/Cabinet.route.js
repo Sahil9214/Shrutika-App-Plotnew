@@ -19,6 +19,7 @@ CabinetRouter.get("/api/cabinet/get/:roomId", async (req, res) => {
 
 // Add Cabinet Request
 CabinetRouter.post("/api/cabinet/add/:roomId", async (req, res) => {
+    console.log("*** req.body ********** ", req.body);
     try {
         const { roomId, cabinetName } = req.body;
         console.log(roomId, cabinetName);
@@ -40,6 +41,7 @@ CabinetRouter.post("/api/cabinet/add/:roomId", async (req, res) => {
 
 // Delete Cabinet Request
 CabinetRouter.delete("/api/cabinet/delete/:id", async (req, res) => {
+    console.log("*** req.params ********** ", req);
     try {
         const { id } = req.params;
         if (!mongoose.isValidObjectId(id)) {
@@ -57,7 +59,7 @@ CabinetRouter.delete("/api/cabinet/delete/:id", async (req, res) => {
 });
 
 // Patch Cabinet Request
-CabinetRouter.patch("/api/room/patch/:id", async (req, res) => {
+CabinetRouter.patch("/api/cabinet/patch/:id", async (req, res) => {
     try {
         const { id } = req.params;
         if (!mongoose.isValidObjectId(id)) {

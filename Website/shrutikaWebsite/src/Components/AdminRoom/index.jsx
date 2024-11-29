@@ -1,4 +1,5 @@
-import { Trash2, PlusCircle, PenBox } from "lucide-react";
+/* eslint-disable react/prop-types */
+import { Trash2, PlusCircle } from "lucide-react";
 
 // Moved modal component outside
 const AddRoomModal = ({
@@ -64,11 +65,13 @@ const AdminRoom = ({
   return (
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
-        <div className="flex flex-col lg:flex-row justify-between items-center mb-6">
-          <h1 className="text-xl font-bold mb-4 lg:mb-0">Room Management</h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-sm sm:text-base md:text-base lg:text-xl font-bold mb-4 lg:mb-0">
+            Room Management
+          </h1>
           <button
             onClick={() => setIsAddRoomModalOpen(true)}
-            className="flex items-center bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 transition-colors"
+            className="text-sm sm:text-base md:text-base lg:text-lg flex items-center bg-green-500 text-white  px-3 py-2 rounded hover:bg-green-600 transition-colors"
             disabled={isLoading}
           >
             <PlusCircle className="mr-2" /> Add Room

@@ -8,12 +8,32 @@ const getCabinateItemData = (cabinateId) => {
     })
 }
 
-const updateCabinetItemQuantity = (itemId, quantity) => {
-  return httpRequest({
-    method: "PATCH",
-    url: `/api/cabinet-item/patch/${itemId}`,
-    body: { quantity: String(quantity) },
-  });
+const updateCabinateItem = (itemId, data) => {
+    return httpRequest({
+        method: "PATCH",
+        url: `/api/cabinet-item/patch/${itemId}`,
+        body: data
+    });
 };
 
-export { getCabinateItemData, updateCabinetItemQuantity };
+const addCabinateItem = (data) => {
+    return httpRequest({
+        method: "POST",
+        url: "/api/cabinet-item/add",
+        body: data
+    });
+};
+
+const deleteCabinateItem = (itemId) => {
+    return httpRequest({
+        method: "DELETE",
+        url: `/api/cabinet-item/delete/${itemId}`
+    });
+};
+
+export { 
+    getCabinateItemData, 
+    addCabinateItem, 
+    updateCabinateItem, 
+    deleteCabinateItem 
+};
