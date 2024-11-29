@@ -8,4 +8,12 @@ const getCabinateItemData = (cabinateId) => {
     })
 }
 
-export { getCabinateItemData };
+const updateCabinetItemQuantity = (itemId, quantity) => {
+  return httpRequest({
+    method: "PATCH",
+    url: `/api/cabinet-item/patch/${itemId}`,
+    body: { quantity: String(quantity) },
+  });
+};
+
+export { getCabinateItemData, updateCabinetItemQuantity };

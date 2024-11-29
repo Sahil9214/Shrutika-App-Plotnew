@@ -33,6 +33,7 @@ RoomRouter.post("/api/room/add", async (req, res) => {
 
 // Delete Room
 RoomRouter.delete("/api/room/delete/:id", async (req, res) => {
+    console.log("*** DeleteId ********** ", req.params.id);
     try {
         const { id } = req.params;
         if (!mongoose.isValidObjectId(id)) {
@@ -42,10 +43,10 @@ RoomRouter.delete("/api/room/delete/:id", async (req, res) => {
         if (!room) {
             return res.status(404).send({ msg: "Room not found" });
         }
-        res.status(200).send({ data: room, message: "Room deleted successfully" });
+        res.status(200).send({ data: room, message: "Room successfully removed" });
     } catch (error) {
-        console.error("Error deleting room:", error);
-        res.status(500).send({ message: "Something went wrong" });
+        console.error("Error removing room:", error);
+        res.status(500).send({ message: "An error occurred" });
     }
 });
 

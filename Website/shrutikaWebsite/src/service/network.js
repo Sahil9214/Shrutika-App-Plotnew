@@ -7,27 +7,30 @@ axios.defaults.responseType = 'json';
 // TODO: uncomment this after updating .env on live.
 axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL;
 
-const httpRequest = async ({ method, url, body, params }) => {
-    console.log("**** hello ****", method, url, body, params);
+const httpRequest = async ({ method, url, body = null, params = null }) => {
     try {
-        const response = await axios({
+        const config = {
             method: method.toLowerCase(),
             url,
-            data: body || null,
-            params: params || null,
             headers: {
                 "Content-Type": "application/json",
-            },
-        });
-        if (response.status) {
+            }
+        };
+
+        // Only add data/params if they exist
+        if (body) config.data = body;
+        if (params) config.params = params;
+
+        const response = await axios(config);
+        
+        if (response.status >= 200 && response.status < 300) {
             return response.data;
-        } else {
-            throw new Error("Something Went wrong ");
         }
+        throw new Error(response.data.message || "Request failed");
     } catch (error) {
-        console.log('inside catch', error);
+        console.error('Request error:', error);
         throw error;
     }
-}
+};
 
 export { httpRequest }

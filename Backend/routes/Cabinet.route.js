@@ -6,7 +6,7 @@ import { Room } from '../models/Room.model.js';
 const CabinetRouter = express.Router();
 
 // Get Cabinet Request
-CabinetRouter.get("/api/room/get/:roomId", async (req, res) => {
+CabinetRouter.get("/api/cabinet/get/:roomId", async (req, res) => {
     const { roomId } = req.params;
     try {
         const cabinetData = await Cabinet.find({ room: roomId });
@@ -18,7 +18,7 @@ CabinetRouter.get("/api/room/get/:roomId", async (req, res) => {
 });
 
 // Add Cabinet Request
-CabinetRouter.post("/api/room/add/:roomId", async (req, res) => {
+CabinetRouter.post("/api/cabinet/add/:roomId", async (req, res) => {
     try {
         const { roomId, cabinetName } = req.body;
         console.log(roomId, cabinetName);
@@ -39,7 +39,7 @@ CabinetRouter.post("/api/room/add/:roomId", async (req, res) => {
 });
 
 // Delete Cabinet Request
-CabinetRouter.delete("/api/room/delete/:id", async (req, res) => {
+CabinetRouter.delete("/api/cabinet/delete/:id", async (req, res) => {
     try {
         const { id } = req.params;
         if (!mongoose.isValidObjectId(id)) {
