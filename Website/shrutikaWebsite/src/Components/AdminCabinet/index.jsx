@@ -66,11 +66,11 @@ const AdminCabinate = ({
     <div className="container mx-auto p-6">
       <div className="bg-white shadow-md rounded-lg p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-sm sm:text-base md:text-base lg:text-xl font-bold mb-4 lg:mb-0">
+          <h2 className="text-sm sm:text-base md:text-base lg:text-base font-bold mb-4 lg:mb-0">
             Cabinet Management
           </h2>
           <button
-            className="text-sm sm:text-base md:text-base lg:text-lg flex items-center bg-green-500 text-white  px-3 py-2 rounded hover:bg-green-600 transition-colors"
+            className="text-sm sm:text-base md:text-base lg:text-sm flex items-center bg-green-500 text-white  px-2 py-2 rounded hover:bg-green-600 transition-colors"
             onClick={() => setIsModalOpen(true)}
           >
             <PlusCircle className="mr-2" /> Add Cabinet

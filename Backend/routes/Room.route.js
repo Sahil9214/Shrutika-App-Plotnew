@@ -50,4 +50,18 @@ RoomRouter.delete("/api/room/delete/:id", async (req, res) => {
     }
 });
 
+//Patch Request
+RoomRouter.patch("/api/room/update/:id", async (req, res) => {
+    const { id } = req.params;
+    const { title } = req.body;
+    try {
+        const findRoom = await Room.findByIdAndUpdate(id, { title }, { new: true });
+        res.status(200).send({ data: findRoom, message: "Room updated successfully" });
+    }
+    catch (error) {
+        console.error("Error updating room:", error);
+        res.status(500).send({ message: "Something went wrong" });
+    }
+});
+
 export default RoomRouter;

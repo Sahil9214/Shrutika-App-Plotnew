@@ -4,7 +4,7 @@ import { AdminCabinetItem } from "../../../Components/AdminCabinetItem";
 import { useState, useEffect } from "react";
 import { getRoomData } from "../../../service/roomServices";
 import { getCabinetData } from "../../../service/cabinetServices/cabinetServices";
-import { addRoomData } from "../../../service/roomServices";
+import { addRoomData, updateRoom } from "../../../service/roomServices";
 import { deleteRoom } from "../../../service/roomServices";
 import { getCabinateItemData } from "../../../service/cabinateItemService/cabinateItemService";
 
@@ -75,6 +75,14 @@ const AdminDashboard = () => {
       setIsLoading(false);
     }
   };
+  const handleUpdateRoom = async (roomId, newName) => {
+    try {
+      await updateRoom(roomId, newName);
+      await fetchRoomData();
+    } catch (error) {
+      console.error("Error updating room:", error);
+    }
+  };
   //  HANDLE THE ADMINCABINETITEM
   const handleCabinetSelect = async (cabinetId) => {
     setSelectedCabinetId(cabinetId);
@@ -120,6 +128,7 @@ const AdminDashboard = () => {
             rooms={rooms}
             selectedRoomId={selectedRoomId}
             handleRoomSelect={handleRoomSelect}
+            handleUpdateRoom={handleUpdateRoom}
           />
         </div>
         <div className="min-h-[500px] md:h-[calc(100vh-120px)] bg-white rounded-lg shadow-lg">

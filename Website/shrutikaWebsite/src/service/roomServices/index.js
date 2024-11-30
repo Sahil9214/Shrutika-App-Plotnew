@@ -23,7 +23,14 @@ const deleteRoom = (id) => {
     params: null,
   });
 };
+const updateRoom = (id, title) => {
 
-export { getRoomData, addRoomData, deleteRoom };
+  return httpRequest({
+    method: "PATCH",
+    url: `/api/room/update/${id}`,
+    body: { title },
+  });
+};
+export { getRoomData, addRoomData, deleteRoom, updateRoom };
 
 
