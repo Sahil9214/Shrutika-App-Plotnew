@@ -19,12 +19,37 @@ CabinetItemRouter.get("/api/cabinet-item/get/:cabinetId", async (req, res) => {
 // Add Cabinet Item Request
 CabinetItemRouter.post("/api/cabinet-item/add", async (req, res) => {
     try {
-        const { cabinetId, title, quantity } = req.body;
-        console.log(cabinetId, title, quantity);
-        if (!cabinetId || !title || !quantity) {
-            return res.status(400).send({ msg: "Cabinet ID, title, and quantity are required" });
+        const {
+            cabinetId,
+            title,
+            quantity,
+            expiryDate,
+            cataglogueNumber, 
+            dateOfPurchase,
+            brand,
+            stock,
+            damage
+        } = req.body;
+
+        // Validate required fields
+        if (!cabinetId || !title || !quantity || !dateOfPurchase || !stock) {
+            return res.status(400).send({ 
+                msg: "Cabinet ID, title, quantity, date of purchase, and stock are required" 
+            });
         }
-        const newCabinetItem = new CabinateItem({ cabinetId, title, quantity });
+
+        const newCabinetItem = new CabinateItem({
+            cabinetId,
+            title,
+            quantity,
+            expiryDate,
+            cataglogueNumber,
+            dateOfPurchase,
+            brand,
+            stock,
+            damage
+        });
+
         await newCabinetItem.save();
         res.status(201).send({ data: newCabinetItem, message: "Cabinet item added successfully" });
     } catch (error) {

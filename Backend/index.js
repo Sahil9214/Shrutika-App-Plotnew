@@ -1,11 +1,13 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
-import { config } from 'dotenv';
-import { connection } from './db.js';
+import connection from './db.js';
 import CabinetRouter from './routes/Cabinet.route.js';
 import RoomRouter from './routes/Room.route.js';
 import CabinetItemRouter from './routes/CabinetItem.route.js';
 import cors from 'cors';
-config();
+
 const app = express();
 app.use(cors({
     origin: ['http://localhost:5173', "https://shrutika-app-plotnew.vercel.app"], // Your Vite dev server URL
