@@ -140,7 +140,7 @@ const AdminRoom = ({
           </h1>
           <button
             onClick={() => setIsAddRoomModalOpen(true)}
-            className="text-sm sm:text-base md:text-base lg:text-lg flex items-center bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 transition-colors"
+            className="w-full sm:w-auto flex items-center justify-center bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 transition-colors"
             disabled={isLoading}
           >
             <PlusCircle className="mr-2" /> Add Room

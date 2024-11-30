@@ -58,7 +58,9 @@ const AdminCabinetItem = ({
   return (
     <div className="h-full flex flex-col p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-        <h1 className="text-xl font-bold">Cabinet Items</h1>
+        <h1 className="text-sm sm:text-base md:text-base lg:text-base font-bold mb-4 lg:mb-0">
+          Cabinet Items
+        </h1>
         <button
           onClick={() => setIsModalOpen(true)}
           className="w-full sm:w-auto flex items-center justify-center bg-green-500 text-white px-3 py-2 rounded hover:bg-green-600 transition-colors"

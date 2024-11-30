@@ -1,15 +1,17 @@
 import { useNavigate } from "react-router-dom";
-
+import Logo from "../../assets/PlotNewLogo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <nav className="bg-white  sticky w-full top-0 z-50 h-[10vh] ">
+    <nav className=" sticky w-full top-0 z-50 h-[10vh] bg-green-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center">
+          <div className="flex-shrink-0 flex items-center  rounded-xl px-2 py-1  ">
             {/* You can replace the text with your logo image */}
-            <div className="text-xl font-bold text-gray-800">Your Logo</div>
+            <a href="/" className="hover:scale-110 duration-300">
+              <img src={Logo} alt="Logo" className="w-24 h-12" />
+            </a>
           </div>
 
           {/* Admin Login Button */}
