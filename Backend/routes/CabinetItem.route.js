@@ -24,7 +24,7 @@ CabinetItemRouter.post("/api/cabinet-item/add", async (req, res) => {
             title,
             quantity,
             expiryDate,
-            cataglogueNumber, 
+            catalogueNumber,
             dateOfPurchase,
             brand,
             stock,
@@ -33,8 +33,8 @@ CabinetItemRouter.post("/api/cabinet-item/add", async (req, res) => {
 
         // Validate required fields
         if (!cabinetId || !title || !quantity || !dateOfPurchase || !stock) {
-            return res.status(400).send({ 
-                msg: "Cabinet ID, title, quantity, date of purchase, and stock are required" 
+            return res.status(400).send({
+                msg: "Cabinet ID, title, quantity, date of purchase, and stock are required"
             });
         }
 
@@ -43,7 +43,7 @@ CabinetItemRouter.post("/api/cabinet-item/add", async (req, res) => {
             title,
             quantity,
             expiryDate,
-            cataglogueNumber,
+            catalogueNumber,
             dateOfPurchase,
             brand,
             stock,
@@ -78,6 +78,8 @@ CabinetItemRouter.delete("/api/cabinet-item/delete/:id", async (req, res) => {
 
 // Patch Cabinet Item Request
 CabinetItemRouter.patch("/api/cabinet-item/patch/:id", async (req, res) => {
+    console.log("patch request received", req.params.id);
+    console.log("patch request body", req.body);
     try {
         const { id } = req.params;
         if (!mongoose.isValidObjectId(id)) {

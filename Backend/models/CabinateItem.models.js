@@ -5,7 +5,7 @@ const CabinateItemSchema = mongoose.Schema({
     quantity: { type: String, required: true },
     cabinetId: { type: mongoose.Schema.Types.ObjectId, ref: 'Cabinet', required: true },
     expiryDate: { type: Date },
-    cataglogueNumber: { type: String },
+    catalogueNumber: { type: String },
     dateOfPurchase: { type: String, required: true },
     brand: { type: String },
 
