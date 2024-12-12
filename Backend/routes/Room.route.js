@@ -4,6 +4,94 @@ import { Room } from "../models/Room.model.js";
 
 const RoomRouter = Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Room:
+ *       type: object
+ *       required:
+ *         - title
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated MongoDB ID
+ *         title:
+ *           type: string
+ *           description: Name of the room
+ */
+
+/**
+ * @swagger
+ * /api/room/get:
+ *   get:
+ *     summary: Get all rooms
+ *     tags: [Rooms]
+ *     responses:
+ *       200:
+ *         description: List of all rooms
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Room'
+ *                 message:
+ *                   type: string
+ *                 status:
+ *                   type: boolean
+ */
+
+/**
+ * @swagger
+ * /api/room/add:
+ *   post:
+ *     summary: Create a new room
+ *     tags: [Rooms]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *             properties:
+ *               title:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Room created successfully
+ *       400:
+ *         description: Title is required
+ */
+
+/**
+ * @swagger
+ * /api/room/delete/{id}:
+ *   delete:
+ *     summary: Delete a room by ID
+ *     tags: [Rooms]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Room ID
+ *     responses:
+ *       200:
+ *         description: Room deleted successfully
+ *       400:
+ *         description: Invalid room ID
+ *       404:
+ *         description: Room not found
+ *       500:
+ *         description: Server error
+ */
 // Get Room Data
 RoomRouter.get("/api/room/get", async (req, res) => {
     try {
