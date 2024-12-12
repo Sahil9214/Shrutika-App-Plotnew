@@ -5,6 +5,92 @@ import { Room } from '../models/Room.model.js';
 
 const CabinetRouter = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Cabinet:
+ *       type: object
+ *       required:
+ *         - cabinetName
+ *         - room
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated MongoDB ID
+ *         cabinetName:
+ *           type: string
+ *           description: Name of the cabinet
+ *         room:
+ *           type: string
+ *           description: Reference to Room ID
+ */
+
+/**
+ * @swagger
+ * /api/cabinet/get/{roomId}:
+ *   get:
+ *     summary: Get all cabinets in a room
+ *     tags: [Cabinets]
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Room ID
+ *     responses:
+ *       200:
+ *         description: List of cabinets retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Cabinet'
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Server error
+ */
+
+/**
+ * @swagger
+ * /api/cabinet/add/{roomId}:
+ *   post:
+ *     summary: Add a new cabinet to a room
+ *     tags: [Cabinets]
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - cabinetName
+ *             properties:
+ *               cabinetName:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Cabinet created successfully
+ *       400:
+ *         description: Invalid input
+ *       404:
+ *         description: Room not found
+ *       500:
+ *         description: Server error
+ */
+
 // Get Cabinet Request
 CabinetRouter.get("/api/cabinet/get/:roomId", async (req, res) => {
     const { roomId } = req.params;
@@ -16,6 +102,34 @@ CabinetRouter.get("/api/cabinet/get/:roomId", async (req, res) => {
         res.status(500).send({ message: "Something went wrong" });
     }
 });
+
+/**
+ * @swagger
+ * /api/cabinet/add/{roomId}:
+ *   post:
+ *     summary: Add a new cabinet
+ *     tags: [Cabinets]
+ *     parameters:
+ *       - in: path
+ *         name: roomId
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - cabinetName
+ *             properties:
+ *               cabinetName:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Cabinet created successfully
+ */
 
 // Add Cabinet Request
 CabinetRouter.post("/api/cabinet/add/:roomId", async (req, res) => {

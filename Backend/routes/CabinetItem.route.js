@@ -4,6 +4,125 @@ import mongoose from 'mongoose';
 import { CabinateItem } from '../models/CabinateItem.models.js';
 const CabinetItemRouter = Router();
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     CabinetItem:
+ *       type: object
+ *       required:
+ *         - title
+ *         - quantity
+ *         - cabinetId
+ *         - dateOfPurchase
+ *         - stock
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: Auto-generated MongoDB ID
+ *         title:
+ *           type: string
+ *           description: Item name
+ *         quantity:
+ *           type: string
+ *           description: Quantity of the item
+ *         cabinetId:
+ *           type: string
+ *           description: Reference to Cabinet ID
+ *         expiryDate:
+ *           type: string
+ *           format: date
+ *           description: Expiry date of the item
+ *         catalogueNumber:
+ *           type: string
+ *         dateOfPurchase:
+ *           type: string
+ *           description: Purchase date
+ *         brand:
+ *           type: string
+ *         stock:
+ *           type: string
+ *         damage:
+ *           type: string
+ */
+
+/**
+ * @swagger
+ * /api/cabinet-item/get/{cabinetId}:
+ *   get:
+ *     summary: Get all items in a cabinet
+ *     tags: [Cabinet Items]
+ *     parameters:
+ *       - in: path
+ *         name: cabinetId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Cabinet ID
+ *     responses:
+ *       200:
+ *         description: List of items retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/CabinetItem'
+ *                 message:
+ *                   type: string
+ *       500:
+ *         description: Server error
+ */
+
+/**
+ * @swagger
+ * /api/cabinet-item/add:
+ *   post:
+ *     summary: Add a new item to a cabinet
+ *     tags: [Cabinet Items]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - cabinetId
+ *               - title
+ *               - quantity
+ *               - dateOfPurchase
+ *               - stock
+ *             properties:
+ *               cabinetId:
+ *                 type: string
+ *               title:
+ *                 type: string
+ *               quantity:
+ *                 type: string
+ *               expiryDate:
+ *                 type: string
+ *                 format: date
+ *               catalogueNumber:
+ *                 type: string
+ *               dateOfPurchase:
+ *                 type: string
+ *               brand:
+ *                 type: string
+ *               stock:
+ *                 type: string
+ *               damage:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Item added successfully
+ *       400:
+ *         description: Missing required fields
+ *       500:
+ *         description: Server error
+ */
 // Get Cabinet Item Request
 CabinetItemRouter.get("/api/cabinet-item/get/:cabinetId", async (req, res) => {
     const { cabinetId } = req.params;
